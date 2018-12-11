@@ -90,19 +90,17 @@ byte A[8] = {
 };
 
 void GOOD(){
-  int i;
-  
+    int i;
     for ( i = 0; i < 8; i++ )
-    lc.setColumn(0, i, G[i]);
+        lc.setColumn(0, i, G[i]);
     delay(500);
-  lc.clearDisplay(0); 
-  if ( level < MAX_LEVEL )
-  level++;
+    lc.clearDisplay(0); 
+    if ( level < MAX_LEVEL )
+            level++;
 }
 
 void X(){
   int i;
- 
   for ( i = 0; i < 8; i++ )
     lc.setColumn(0, i, x[i]);
   delay(500);
@@ -112,8 +110,7 @@ void X(){
 
 void ALL(){
   int i;
- 
-    for ( i = 0; i < 8; i++ )
+  for ( i = 0; i < 8; i++ )
     lc.setColumn(0, i, A[i]);
   delay(500);
   lc.clearDisplay(0);   
@@ -121,28 +118,25 @@ void ALL(){
 
 void UP() {
   int i;
- 
-    for ( i = 0; i < 8; i++ )
+  for ( i = 0; i < 8; i++ )
     lc.setColumn(0, i, U[i]);
-   delay(500);
+  delay(500);
   lc.clearDisplay(0);
 }
 
 void RIGHT() {
   int i;
- 
   for ( i = 0; i < 8; i++ )
     lc.setColumn(0, i, R[i]);
-   delay(500);
+  delay(500);
   lc.clearDisplay(0);
 }
 
 void DOWN() {
   int i;
-
   for ( i = 0; i < 8; i++ )
     lc.setColumn(0, i, D[i]);
-delay(500);
+  delay(500);
   lc.clearDisplay(0);
 }
 
@@ -150,7 +144,7 @@ void LEFT() {
   int i;
   for ( i = 0; i < 8; i++ )
     lc.setColumn(0, i, L[i]);
-delay(500);
+  delay(500);
   lc.clearDisplay(0);
 }
 
@@ -174,15 +168,16 @@ void setup()
 void loop()
 {
    if( level == 1)
-       { generate_sequence();
+   { 
+        generate_sequence();
         ALL();
-        }
+    }
    currentMillis = millis();
    if( currentMillis - startMillis >= 500 && ( digitalRead(buttonPinU) == HIGH || level != 1 ))
    { 
        show_sequence();
        get_sequence();
-    startMillis = currentMillis;
+       startMillis = currentMillis;
    }                  
                                                                                                                                                                                                                                                                                                                                                     
 }
@@ -218,8 +213,7 @@ void show_sequence()
 
 void get_sequence()
 {
-  int i, ok = 0;
-
+  int i, ok = 0; 
   for( i = 0; i < level; i++)
   {
     ok = 0;
@@ -245,8 +239,8 @@ void get_sequence()
       {
         DOWN();
         digitalWrite(greenPin,HIGH);
-       delay(100);
-       digitalWrite(greenPin,LOW);
+        delay(100);
+        digitalWrite(greenPin,LOW);
         player_sequence[i] = 2;
         ok = 1;
         delay(500);
@@ -260,9 +254,9 @@ void get_sequence()
       if ( digitalRead(buttonPinL) == HIGH )
       {
         LEFT();
-       digitalWrite(bluePin,HIGH);
-       delay(100);
-       digitalWrite(bluePin,LOW);
+        digitalWrite(bluePin,HIGH);
+        delay(100);
+        digitalWrite(bluePin,LOW);
         player_sequence[i] = 3;
         ok = 1;
         delay(500);
@@ -276,11 +270,11 @@ void get_sequence()
       if ( digitalRead(buttonPinR) == HIGH )
       {
         RIGHT();
-       digitalWrite(bluePin,HIGH);
-       digitalWrite(redPin,HIGH);
-       delay(100);
-       digitalWrite(bluePin,LOW);
-       digitalWrite(redPin,LOW);
+        digitalWrite(bluePin,HIGH);
+        digitalWrite(redPin,HIGH);
+        delay(100);
+        digitalWrite(bluePin,LOW);
+        digitalWrite(redPin,LOW);
         player_sequence[i] = 4;
         ok = 1;
         delay(500);
