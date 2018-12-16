@@ -1,16 +1,16 @@
           SYMON SAYS
 
-1x robotlinking UNO R3
-1x USB cable
-3x breadboard
-jumper wire AND rezistor
-1x matrix display
-4x button
-1x MAX7219
-1x ceramic capacitor
-1x 10UF 50V
-1x RGB LED
-1x LCD DISPLAY
+- 1x robotlinking UNO R3
+- 1x USB cable
+- 3x breadboard
+- jumper wire AND rezistor
+- 1x matrix display
+- 4x button
+- 1x MAX7219
+- 1x ceramic capacitor
+- 1x 10UF 50V
+- 1x RGB LED
+- 1x LCD DISPLAY
 
 
        DESCRIERE
