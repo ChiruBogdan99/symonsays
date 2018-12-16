@@ -2,7 +2,7 @@
 
 1x robotlinking UNO R3
 1x USB cable
-2x breadboard
+3x breadboard
 jumper wire AND rezistor
 1x matrix display
 4x button
@@ -10,6 +10,7 @@ jumper wire AND rezistor
 1x ceramic capacitor
 1x 10UF 50V
 1x RGB LED
+1x LCD DISPLAY
 
 
        DESCRIERE
@@ -18,3 +19,4 @@ Jocul "Symon Says" presupune aparitia unor sageti random, iar player-ul trebuie 
 Se joaca astfel:
    - se porneste cu butonul sageata sus, apoi playerul trebuie sa apese butonul reprezentativ pentru sageata aparuta. Apoi o sa apara pe ecran un bifat daca ai facut secventa corect sau un X daca nu ai respectat secventa.
    - acest joc este pe nivele. Porneste de la o singura sageata si merge pana la 100 de sageti( nu stiu cine poate sa retina 100 de sageti, dar am pus sa fie :))) )
+   - jocul afiseaza pe ecran punctajul si nivelul la care esti, dar si diferite mesaje.
