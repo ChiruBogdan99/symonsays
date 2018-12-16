@@ -20,5 +20,7 @@ Se joaca astfel:
    - se porneste cu butonul sageata sus, apoi playerul trebuie sa apese butonul reprezentativ pentru sageata aparuta. Apoi o sa apara pe ecran un bifat daca ai facut secventa corect sau un X daca nu ai respectat secventa.
    - acest joc este pe nivele. Porneste de la o singura sageata si merge pana la 100 de sageti( nu stiu cine poate sa retina 100 de sageti, dar am pus sa fie :))) )
    - jocul afiseaza pe ecran punctajul si nivelul la care esti, dar si diferite mesaje.
-       Video
+       VIDEO
+   
+          
          https://www.youtube.com/watch?v=3kzuE07CBqs&feature=youtu.be
