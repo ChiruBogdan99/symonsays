@@ -1,5 +1,8 @@
 #include <LedControl.h>
-LedControl lc = LedControl(12, 11, 10, 1);
+#include <LiquidCrystal.h>
+LedControl lc = LedControl( 12, 11, 10, 1);
+LiquidCrystal lcd(A5, A4, A0, A1, A2, A3);
+#define V0_PIN 9
 const int buttonPinU = 2;
 const int buttonPinD = 3;
 const int buttonPinL = 4;
@@ -7,11 +10,11 @@ const int buttonPinR = 5;
 const int redPin = 6;
 const int greenPin = 7;
 const int bluePin = 8;
-int buttonStateU=0, buttonStateD=0, buttonStateR=0, buttonStateL=0;
-unsigned long startMillis, currentMillis;
-const unsigned long period ;
+int buttonStateU = 0, buttonStateD = 0, buttonStateR = 0, buttonStateL = 0;
+unsigned long startMillis, currentMillis, lcdMillis, startLcdMillis;
+const unsigned long period;
 const int MAX_LEVEL = 100;
-int sequence[MAX_LEVEL],player_sequence[MAX_LEVEL], level = 1, counter = 0;
+int sequence[MAX_LEVEL],player_sequence[MAX_LEVEL], level = 1, score = 10;
 byte U[8] = {
   B00000000,
   B00100000,
@@ -89,6 +92,28 @@ byte A[8] = {
   B11000011,
 };
 
+byte H[8] = {
+  B00000,
+  B00000,
+  B01010,
+  B11111,
+  B11111,
+  B01110,
+  B00100,
+  B00000,
+};
+
+byte S[8] = {
+  B00000,
+  B01010,
+  B00000,
+  B00000,
+  B01110,
+  B10001,
+  B00000,
+  B00000,
+};
+
 void GOOD(){
     int i;
     for ( i = 0; i < 8; i++ )
@@ -96,7 +121,10 @@ void GOOD(){
     delay(500);
     lc.clearDisplay(0); 
     if ( level < MAX_LEVEL )
-            level++;
+            {level++;
+            score = score + 10;
+            if(level % 5 == 0)
+            score = score + 500;}
 }
 
 void X(){
@@ -106,6 +134,16 @@ void X(){
   delay(500);
   lc.clearDisplay(0);   
   level = 1;
+  score = 10;
+  lcdMillis = millis();
+  if( lcdMillis - startLcdMillis >=1500)
+  {
+    lcd.clear();
+    lcd.setCursor(0, 2);
+    lcd.print("Try again, bro");
+    lcd.print(char(2));
+    startLcdMillis = lcdMillis;
+  }
 }
 
 void ALL(){
@@ -158,28 +196,58 @@ void setup()
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
   Serial.begin(9600);
+  lcd.createChar(1, H);
+  lcd.createChar(2, S);
+  lcd.begin(16, 2);
+  lcd.clear();
+  lcd.setCursor(2, 1);
   lc.shutdown(0, false);
   lc.setIntensity(0, 7);
   lc.clearDisplay(0);
   startMillis = millis();
-  
+  startLcdMillis = millis();
+  pinMode(V0_PIN, OUTPUT);
+  analogWrite(V0_PIN, 90);
 }
 
 void loop()
 {
+   lcdMillis = millis();
+   if( lcdMillis - startLcdMillis >= 1000 )
+   { 
+     lcd.clear();
+     lcd.print("Welcome, bro ");
+     lcd.print(char(1));
+     lcd.print(char(1));
    if( level == 1)
    { 
         generate_sequence();
         ALL();
+       
     }
+       startLcdMillis = lcdMillis;
+   }                
+       
    currentMillis = millis();
    if( currentMillis - startMillis >= 500 && ( digitalRead(buttonPinU) == HIGH || level != 1 ))
    { 
+       
        show_sequence();
        get_sequence();
+       lcdMillis = millis();
+       if( lcdMillis - startLcdMillis >=500) 
+       {
+       lcd.clear(); 
+       lcd.print("LEVEL ");
+       lcd.print(level);
+       lcd.setCursor(0, 2);
+       lcd.print("SCORE ");
+       lcd.print(score); 
+       startLcdMillis = lcdMillis;
+       }       
        startMillis = currentMillis;
-   }                  
-                                                                                                                                                                                                                                                                                                                                                    
+   }
+                                                                                                                                                                                                                                                                                                                                         
 }
 
 void generate_sequence()
